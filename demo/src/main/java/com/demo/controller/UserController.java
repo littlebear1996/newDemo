@@ -2,27 +2,33 @@ package com.demo.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
-
+import java.util.List;  
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Controller;  
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.bind.annotation.RequestMapping;  
+import org.springframework.web.servlet.ModelAndView;  
 
 import com.demo.projo.User;
 import com.demo.service.UserService;
-
-@Controller
-@RequestMapping("/view")
-public class UserController {
-	@Autowired
-	private UserService userService;
-	/**
-	 * 获取所有用户列表
+ 
+@Controller  
+public class UserController {  
+    @Autowired  
+    private UserService userService;  
+      
+    @RequestMapping("/")    
+    public ModelAndView getIndex(){      
+        ModelAndView mav = new ModelAndView("index");   
+        User user = userService.findUserById(31);  
+        mav.addObject("user", user);   
+        return mav;    
+    }
+    /**
+	 *  获取所有用户列表
 	 */
 	@RequestMapping("/getAllUser")
 	public String getAllUser(HttpServletRequest request,Model model){
@@ -32,14 +38,18 @@ public class UserController {
 		return "/allUser";
 	}
 	/**
-	 * 跳转到添加用户界面
+	 *  跳转到添加用户界面
+	 * @return
 	 */
 	@RequestMapping("/toAddUser")
 	public String toAddUser(){
 		return "addUser";
 	}
 	/**
-	 * 添加用户并重定向
+	 *  添加用户并重定向
+	 * @param user
+	 * @param model
+	 * @return
 	 */
 	@RequestMapping("/addUser")
 	public String addUser(User user,Model model){
@@ -47,7 +57,11 @@ public class UserController {
 		return "redirect:/getAllUser";
 	}
 	/**
-	 * 编辑用户
+	 *  编辑用户
+	 * @param user
+	 * @param request
+	 * @param model
+	 * @return
 	 */
 	@RequestMapping("/updateUser")
 	public String updateUser(User user,HttpServletRequest request,Model model){
@@ -78,7 +92,8 @@ public class UserController {
 		String result = "{\"result\":\"error\"}";  
         if(userService.delUser(userId)){  
             result = "{\"result\":\"success\"}";  
-        }  
+        }
+        response.setContentType("application/json");
         try {  
             PrintWriter out = response.getWriter();  
             out.write(result);  
@@ -86,4 +101,4 @@ public class UserController {
             e.printStackTrace();  
         }  
 	}
-}
+} 
