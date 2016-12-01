@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>    
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"    
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="com.demo.dao.OrderDao">
+  <resultMap type="com.demo.projo.Order" id="baseResultMap">
+    <id column="orderId" property="orderId" jdbcType="INTEGER"/>
+    <result column="user" property="user" jdbcType="CHAR"/>
+    <result column="money" property="money" jdbcType="DOUBLE"/>
+    <result column="orderType" property="orderType" jdbcType="CHAR"/>
+    <result column="orderAddr" property="orderAddr" jdbcType="CHAR"/>
+    <result column="state" property="state" jdbcType="CHAR"/>
+  </resultMap>
+  <!-- 通过订单id查找用户 -->
+  <select id="selectOrderById" parameterType="int" resultMap="baseResultMap">
+    select * from t_order where orderId=#{orderId}
+  </select>
+  <!-- 在t_order表中插入数据 -->
+  <insert id="insertOrder" parameterType="com.demo.projo.Order">
+    insert into t_order(orderId,user,money,orderType,orderAddr,state) values(#{orderId},#{user},#{money},
+    #{orderType},#{orderAddr},#{state})
+  </insert>
+  <!-- 在t_order表中删除数据 -->
+  <delete id="deleteOrderById" parameterType="int">
+    delete from t_order where orderId=#{orderId}
+  </delete>
+  <!-- 在t_order表中更新数据 -->
+  <update id="updateOrder" parameterType="com.demo.projo.Order">
+    update t_order set user=#{user},money=#{money},orderType=#{orderType},orderAddr=#{orderAddr}
+     state=#{state} where orderId=#{orderId}
+  </update>
+  <!-- 查找订单表中的所有用户 -->
+  <select id="selectAllOrder"  resultMap="baseResultMap">
+    select * from t_order
+  </select>
+</mapper>
