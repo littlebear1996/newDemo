@@ -17,25 +17,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<meta http-equiv="expires" content="0">    
 	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
 	<meta http-equiv="description" content="This is my page">
-	<script  type="text/javascript"  src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
-	<script type="text/javascript">
-	  function del(userId){
-	    $.get("<%=basePath%>delUser?userId="+userId,function(data){
-	      if("success"==data.result){
-	        alert("删除成功！");
-	        window.location.reload();
-	      }else{
-	        alert("删除失败！");
-	      }
-	    });
-	  }
-	</script>
 
   </head>
   
   <body>
     <h6><a href="<%=basePath%>toAddUser">添加用户</a></h6>
-    <table border="1">
+    <table border="1" cellpadding="10" cellspacing="0">
       <tbody>
         <tr>
           <th>用户ID</th>
@@ -49,7 +36,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
               <td>${user.userName}</td>
               <td>${user.userMail}</td>
               <td><a href="<%=basePath%>getUser?userId=${user.userId}">编辑</a></td>
-              <td><a href="javascript:del('${user.userId}')">删除</a></td>
+              <td><a href="<%=basePath%>delUser?userId=${user.userId}">删除</a></td>
             </tr>
           </c:forEach>
       </tbody>

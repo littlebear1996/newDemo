@@ -3,6 +3,7 @@ package com.demo.controller;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;  
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -91,17 +92,11 @@ public class UserController {
 		return "/editUser";
 	}
 	@RequestMapping("/delUser")
-	public void delUser(int userId,HttpServletRequest request,HttpServletResponse response){
-		String result = "{\"result\":\"error\"}";  
-        if(userService.delUser(userId)){  
-            result = "{\"result\":\"success\"}";  
-        }
-        response.setContentType("application/json");
-        try {  
-            PrintWriter out = response.getWriter();  
-            out.write(result);  
-        } catch (IOException e) {  
-            e.printStackTrace();  
-        }  
+	public String delUser(int userId,Model model){
+		if(userService.delUser(userId)){
+			return "redirect:getAllUser";
+		}else{
+			return "/error";
+		}  
 	}
 } 

@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 
@@ -42,11 +41,11 @@ public class OrderController {
 		return "/showOrder";
 	}
 	/**
-	 * 跳转到添加订单界面
+	 * 跳转到添加订单页面
 	 */
 	@RequestMapping("/toAddOrder")
 	public String toAddOrder(){
-		return "addOrder";
+		return "/addOrder";
 	}
 	/**
 	 * 添加订单并重定向
@@ -55,6 +54,19 @@ public class OrderController {
 	public String addOrder(Order order,Model model){
 		orderService.insertOrder(order);;
 		return "redirect:/showOrder";
+	}
+	/**
+	 * 通过orderId查找单个用户
+	 * @param orderId
+	 * @param request
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping("/getOrder")
+	public String getOrder(int orderId,HttpServletRequest request,Model model){
+		request.setAttribute("order", orderService.selectOrderById(orderId));
+		model.addAttribute("order", orderService.selectOrderById(orderId));
+		return "/editOrder";
 	}
 	/**
 	 * 修改订单
@@ -70,30 +82,12 @@ public class OrderController {
 			return "/error";
 		}
 	}
-	/**
-	 * 通过orderId查找单个用户
-	 * @param orderId
-	 * @param request
-	 * @param model
-	 * @return
-	 */
-	@RequestMapping("/getOrder")
-	public String getOrder(int orderId,HttpServletRequest request,Model model){
-		request.setAttribute("order", orderService.selectOrderById(orderId));
-		model.addAttribute("order", orderService.selectOrderById(orderId));
-		return "/editOrder";
-	}
 	@RequestMapping("/delOrder")
-	public void delOrder(int orderId,HttpServletRequest request,HttpServletResponse response){
-		String result = "{\"result\":\"error\"}";  
-        if(orderService.deleteOrderById(orderId)){  
-            result = "{\"result\":\"success\"}";  
-        }  
-        try {  
-            PrintWriter out = response.getWriter();  
-            out.write(result);  
-        } catch (IOException e) {  
-            e.printStackTrace();  
-        }  
+	public String delOrder(int orderId,Model model){
+		if(orderService.deleteOrderById(orderId)){
+			return "redirect:showOrder";
+		}else{
+			return "/error";
+		}  
 	}
 }
