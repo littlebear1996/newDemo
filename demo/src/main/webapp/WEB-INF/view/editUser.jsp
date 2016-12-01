@@ -28,7 +28,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   
   <body>
     <form action="" name="userForm">
-                 用户Id：<input type="hidden" name="userId" value="${user.userId}"><br>
+                 <input type="hidden" name="userId" value="${user.userId}"><br>
                  用户名：<input type="text" name="userName" value="${user.userName}"><br>
                  密    码：<input type="password" name="password" value="${user.userMail}"><br> 
                  邮    箱：<input type="text" name="userMail" value="${user.userMail}"><br>
