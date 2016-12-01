@@ -1,4 +1,4 @@
-<%@ page language="java" import="java.util.*" pageEncoding="ISO-8859-1"%>
+<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
 String path = request.getContextPath();
@@ -17,12 +17,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<meta http-equiv="expires" content="0">    
 	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
 	<meta http-equiv="description" content="This is my page">
-	<!--
-	<link rel="stylesheet" type="text/css" href="styles.css">
-	-->
+	<script  type="text/javascript"  src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
 	<script type="text/javascript">
-	  function del(id){
-	    $.get("<%=basePath%>delUser?id="+id,function(data){
+	  function del(userId){
+	    $.get("<%=basePath%>delUser?userId="+userId,function(data){
 	      if("success"==data.result){
 	        alert("删除成功！");
 	        window.location.reload();
@@ -45,17 +43,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
           <th>邮箱</th>
           <th>操作</th>
         </tr>
-        <c:if test="${!empyt userList}">
-          <c:forEach items="${userlist}" var="user">
+          <c:forEach items="${userList}" var="user">
             <tr>
               <td>${user.userId}</td>
               <td>${user.userName}</td>
               <td>${user.userMail}</td>
-              <td><a href="<%=basePath%>getUser?id=${user.userId}">编辑</a></td>
+              <td><a href="<%=basePath%>getUser?userId=${user.userId}">编辑</a></td>
               <td><a href="javascript:del('${user.userId}')">删除</a></td>
             </tr>
           </c:forEach>
-        </c:if>
       </tbody>
     </table>
   </body>

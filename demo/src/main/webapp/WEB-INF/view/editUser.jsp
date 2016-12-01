@@ -1,4 +1,4 @@
-<%@ page language="java" import="java.util.*" pageEncoding="ISO-8859-1"%>
+<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -8,7 +8,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <html>
   <head>
     <base href="<%=basePath%>">
-    
     <title>编辑用户</title>
     
 	<meta http-equiv="pragma" content="no-cache">
@@ -30,7 +29,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <body>
     <form action="" name="userForm">
                  用户Id：<input type="hidden" name="userId" value="${user.userId}"><br>
-                 用户名：<input type="text" name="userName" value="${user.userName}"><br> 
+                 用户名：<input type="text" name="userName" value="${user.userName}"><br>
+                 密    码：<input type="password" name="password" value="${user.userMail}"><br> 
                  邮    箱：<input type="text" name="userMail" value="${user.userMail}"><br>
                  <input type="button" value="确定" onclick="updateUser()">   
     </form>
