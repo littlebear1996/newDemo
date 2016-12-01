@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>    
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"    
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
-<mapper namespace="com.demo.dao.UserDao">
+<mapper namespace="com.demo.dao.UserDao"><!-- namespqce必须和接口全名一致 -->
   <resultMap type="com.demo.projo.User" id="baseResultMap">
     <id column="user_id" property="userId" jdbcType="INTEGER"/>
     <result column="user_name" property="userName" jdbcType="CHAR"/>
@@ -12,7 +12,13 @@
   <select id="findUserById" parameterType="int" resultMap="baseResultMap">
     select * from user_table where user_id=#{userId}
   </select>
-  <!-- 在User表中插入数据 -->
+  <!-- 在User表中插入数据，由于没有在mybatis-config中为User配置别名，所以在这里parameterType必须使用类的路径全名 
+     可以在mybatis-config中通过
+    <typeAliases>  
+        <typeAlias alias="User" type="com.demo.projo .User" />  
+    </typeAliases>
+      来配置别名 
+  -->
   <insert id="addUser" parameterType="com.demo.projo.User">
     insert into user_table(user_id,user_name,user_password,user_email) values(#{userId},#{userName},#{password},#{userMail})
   </insert>
