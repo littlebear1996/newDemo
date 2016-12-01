@@ -1,12 +1,7 @@
 package com.demo.controller;
 
-import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.Map;
-
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -51,7 +46,7 @@ public class OrderController {
 	 * 添加订单并重定向
 	 */
 	@RequestMapping("/addOrder")
-	public String addOrder(Order order,Model model){
+	public String addOrder(Order order){
 		orderService.insertOrder(order);;
 		return "redirect:/showOrder";
 	}
@@ -63,19 +58,21 @@ public class OrderController {
 	 * @return
 	 */
 	@RequestMapping("/getOrder")
-	public String getOrder(int orderId,HttpServletRequest request,Model model){
-		request.setAttribute("order", orderService.selectOrderById(orderId));
+	/*public String getOrder(int orderId,Model model){
 		model.addAttribute("order", orderService.selectOrderById(orderId));
+		return "/editOrder";
+	}*/
+	public String getOrder(int orderId,HttpServletRequest request){
+		request.setAttribute("order", orderService.selectOrderById(orderId));
 		return "/editOrder";
 	}
 	/**
 	 * 修改订单
 	 */
 	@RequestMapping("/updateOrder")
-	public String updateOrder(Order order,HttpServletRequest request,Model model){
+	public String updateOrder(Order order,HttpServletRequest request){
 		if(orderService.updateOrder(order)){
 			order = orderService.selectOrderById(order.getOrderId());
-			model.addAttribute("order",order);
 			request.setAttribute("order", order);
 			return "redirect:showOrder";
 		}else{
@@ -83,7 +80,7 @@ public class OrderController {
 		}
 	}
 	@RequestMapping("/delOrder")
-	public String delOrder(int orderId,Model model){
+	public String delOrder(int orderId){
 		if(orderService.deleteOrderById(orderId)){
 			return "redirect:showOrder";
 		}else{
