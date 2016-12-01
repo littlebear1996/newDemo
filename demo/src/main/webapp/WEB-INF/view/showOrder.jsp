@@ -20,25 +20,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<!--
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
-	<script type="text/javascript">
-	  function del(orderId){
-	    $.get("<%=basePath%>delOrder?orderId="+orderId,function(data){
-	      if("success"==data.result){
-	        alert("删除成功！");
-	        window.location.reload();
-	      }else{
-	        alert("删除失败！");
-	      }
-	    });
-	  }
-	</script>
-
   </head>
   
   <body>
-    <a href="<%=basePath%>toAddOrder">添加订单</a>
-    <table border="1">
-      <tbody>
+    <table border="1" cellpadding="10" cellspacing="0">
         <tr>
           <th>订单编号</th>
           <th>用户</th>
@@ -46,6 +31,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
           <th>订单类型</th>
           <th>收货地址</th>
           <th>订单状态</th>
+          <th>Edit</th>
+          <th>Delete</th>
         </tr>
           <c:forEach items="${orderList}" var="order">
             <tr>
@@ -55,11 +42,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
               <td>${order.orderType}</td>
               <td>${order.orderAddr}</td>
               <td>${order.state}</td>
-              <td><a href="<%=basePath%>getOrder?orderId=${order.orderId}">编辑</a></td>
-              <td><a href="javascript:del('${order.orderId}')">删除</a></td>
+              <td><a href="<%=basePath%>getOrder?orderId=${order.orderId}">Edit</a></td>
+              <td><a href="<%=basePath%>delOrder?orderId=${order.orderId}">Delete</a></td>
             </tr>
           </c:forEach>
-      </tbody>
     </table>
+    <a href="<%=basePath%>toAddOrder">添加订单</a>
   </body>
 </html>

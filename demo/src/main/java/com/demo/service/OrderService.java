@@ -7,7 +7,7 @@ import com.demo.projo.Order;
 public interface OrderService {
 
 	/**
-	 * 通过用户Id查找订单
+	 * 通过Id查找订单
 	 * @param orderId
 	 * @return
 	 */
@@ -18,7 +18,7 @@ public interface OrderService {
 	 */
 	public void insertOrder(Order order);
 	/**
-	 * 通过用户Id删除订单
+	 * 通过Id删除订单
 	 * @param orderId
 	 */
 	public boolean deleteOrderById(int orderId);
@@ -28,7 +28,7 @@ public interface OrderService {
 	 */
 	public Boolean updateOrder(Order order);
 	/**
-	 * 列出目前所存在的所有订单
+	 * 列出所有订单
 	 * @return
 	 */
 	public List<Order> selectAllOrder();

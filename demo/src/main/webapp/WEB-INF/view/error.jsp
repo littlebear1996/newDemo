@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html" pageEncoding="utf-8" errorPage="error.jsp"%>
+<%@ page language="java" import="java.util.*" pageEncoding="ISO-8859-1" isErrorPage="true"%>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -9,19 +9,20 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <head>
     <base href="<%=basePath%>">
     
-    <title>首页</title>
+    <title>My JSP 'error.jsp' starting page</title>
+    
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
 	<meta http-equiv="expires" content="0">    
 	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
 	<meta http-equiv="description" content="This is my page">
+	<!--
+	<link rel="stylesheet" type="text/css" href="styles.css">
+	-->
+
   </head>
   
   <body>
-
-   <a href="<%=basePath%>/showOrder">进入订单管理页</a><br>
-    
-   <a href="<%=basePath%>/getAllUser">进入用户管理页</a>  
-   
+    This is my error page. <br>
   </body>
 </html>

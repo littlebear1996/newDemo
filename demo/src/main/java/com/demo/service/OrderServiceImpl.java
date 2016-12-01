@@ -23,7 +23,7 @@ public class OrderServiceImpl implements OrderService {
 	@Override
 	public void insertOrder(Order order) {
 		// TODO Auto-generated method stub
-		
+		orderDao.insertOrder(order);
 	}
 
 	@Override
