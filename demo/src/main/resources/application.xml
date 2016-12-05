@@ -14,7 +14,7 @@
     <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
     <property name="url" value="jdbc:mysql://localhost:3306/test"/>
     <property name="username" value="root"/>
-    <property name="password" value="930818"/>
+    <property name="password" value="19950811_j"/>
   </bean>
   <!-- 自动扫描所有的XXXMapper.xml对应的接口文件，这样就不用一个一个手动配置Mapper映射了，只要Mapper接口类和映射文件对应起来就可以了 -->
   <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">  

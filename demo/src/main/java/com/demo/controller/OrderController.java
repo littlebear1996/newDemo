@@ -1,7 +1,9 @@
 package com.demo.controller;
 
 import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,10 +25,14 @@ public class OrderController {
 	 * 首页
 	 */
 	@RequestMapping("/")
-	public ModelAndView getIndex(){
-		ModelAndView mav = new ModelAndView("index");
-		return mav;
+	public String getIndex() {
+		return "/index";
 	}
+//	@RequestMapping("/")
+//	public ModelAndView getIndex(){
+//		ModelAndView mav = new ModelAndView("index");
+//		return mav;
+//	}
 	/**
 	 * 获取所有订单
 	 */
@@ -70,10 +76,9 @@ public class OrderController {
 	 * 修改订单
 	 */
 	@RequestMapping("/updateOrder")
-	public String updateOrder(Order order,HttpServletRequest request){
+	public String updateOrder(Order order){
 		if(orderService.updateOrder(order)){
 			order = orderService.selectOrderById(order.getOrderId());
-			request.setAttribute("order", order);
 			return "redirect:showOrder";
 		}else{
 			return "/error";
