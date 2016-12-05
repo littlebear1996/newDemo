@@ -78,7 +78,6 @@ public class OrderController {
 	@RequestMapping("/updateOrder")
 	public String updateOrder(Order order){
 		if(orderService.updateOrder(order)){
-			order = orderService.selectOrderById(order.getOrderId());
 			return "redirect:showOrder";
 		}else{
 			return "/error";
