@@ -16,7 +16,7 @@
   </select>
   <!-- 在t_order表中插入数据 -->
   <insert id="insertOrder" parameterType="com.demo.projo.Order">
-    insert into t_order(orderId,user,money,orderType,orderAddr,state) values(#{orderId},#{user},#{money},
+    insert into t_order(user,money,orderType,orderAddr,state) values(#{user},#{money},
     #{orderType},#{orderAddr},#{state})
   </insert>
   <!-- 在t_order表中删除数据 -->
@@ -26,7 +26,7 @@
   <!-- 在t_order表中更新数据 -->
   <update id="updateOrder" parameterType="com.demo.projo.Order">
     update t_order set user=#{user},money=#{money},orderType=#{orderType},orderAddr=#{orderAddr},
-     state=#{state} where orderId=#{orderId}
+    state=#{state} where orderId=#{orderId}
   </update>
   <!-- 查找订单表中的所有用户 -->
   <select id="selectAllOrder"  resultMap="baseResultMap">

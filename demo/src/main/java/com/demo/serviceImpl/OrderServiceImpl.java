@@ -1,4 +1,4 @@
-package com.demo.service;
+package com.demo.serviceImpl;
 
 import java.util.List;
 
@@ -7,8 +7,10 @@ import org.springframework.stereotype.Service;
 
 import com.demo.dao.OrderDao;
 import com.demo.projo.Order;
+import com.demo.service.OrderService;
 
-@Service("orderService")
+
+@Service
 public class OrderServiceImpl implements OrderService {
 	
 	@Autowired
@@ -16,14 +18,17 @@ public class OrderServiceImpl implements OrderService {
 	
 	@Override
 	public Order selectOrderById(int orderId) {
+		
 		// TODO Auto-generated method stub
 		return orderDao.selectOrderById(orderId);
 	}
 
 	@Override
 	public void insertOrder(Order order) {
+		
 		// TODO Auto-generated method stub
 		orderDao.insertOrder(order);
+		this.updateOrder(null);
 	}
 
 	@Override

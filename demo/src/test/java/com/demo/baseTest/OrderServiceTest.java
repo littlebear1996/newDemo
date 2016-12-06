@@ -19,7 +19,24 @@ public class OrderServiceTest extends SpringTestCase{
 	@Test
 	public void listAllTest(){
 		List<Order> list = orderService.selectAllOrder();
+		// 下单逻辑
+		
+		//1.验证用户
+		
+		//2.check商品
+		
+		//3.参数合法性
+		
+		//4.下单
+		
+		//5.支付
+		
+		//6.结算
+		
+		//7....
+		
 		for(Order order:list){
+			System.out.println(1/0);
 			System.out.println(order);
 		}
 	}
