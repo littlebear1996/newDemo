@@ -28,7 +28,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
           <th>用户ID</th>
           <th>用户名</th>
           <th>邮箱</th>
-          <th>操作</th>
+          <th colspan="2">操作</th>
         </tr>
           <c:forEach items="${userList}" var="user">
             <tr>

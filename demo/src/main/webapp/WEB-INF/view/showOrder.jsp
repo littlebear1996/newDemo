@@ -23,7 +23,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </head>
   
   <body>
-    <table border="1" cellpadding="10" cellspacing="0">
+    <table align="center" border="1" cellpadding="10" cellspacing="0">
         <tr>
           <th>订单编号</th>
           <th>用户</th>
@@ -46,7 +46,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
               <td><a href="<%=basePath%>delOrder?orderId=${order.orderId}">Delete</a></td>
             </tr>
           </c:forEach>
+          <a  href="<%=basePath%>toAddOrder">添加订单</a>
     </table>
-    <a href="<%=basePath%>toAddOrder">添加订单</a>
   </body>
 </html>

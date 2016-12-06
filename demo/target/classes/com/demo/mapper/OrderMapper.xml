@@ -25,8 +25,8 @@
   </delete>
   <!-- 在t_order表中更新数据 -->
   <update id="updateOrder" parameterType="com.demo.projo.Order">
-    update t_order set user=#{user},money=#{money},orderType=#{orderType},orderAddr=#{orderAddr}
-     state=#{state} where orderId=#{orderId}
+    update t_order set user=#{user},money=#{money},orderType=#{orderType},orderAddr=#{orderAddr},
+    state=#{state} where orderId=#{orderId}
   </update>
   <!-- 查找订单表中的所有用户 -->
   <select id="selectAllOrder"  resultMap="baseResultMap">
