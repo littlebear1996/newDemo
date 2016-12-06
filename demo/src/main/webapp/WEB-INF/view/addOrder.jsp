@@ -27,11 +27,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<form:form method="POST" modelAttribute="order" action="addOrder">
 		<table align="center">
 			<tr>
-				<td>订单编号</td>
-				<td><form:input path="orderId" /></td>
-				<td><form:errors path="orderId" /></td>
-			</tr>
-			<tr>
 				<td>用户名</td>
 				<td><form:input path="user" /></td>
 				<td><form:errors path="user" /></td>

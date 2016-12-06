@@ -11,7 +11,6 @@ public class Order {
     /**
      * 订单编号
      */
-	@Min(value=10,message="orderId>=10")
 	private Integer orderId;
 	/**
 	 * 用户名
