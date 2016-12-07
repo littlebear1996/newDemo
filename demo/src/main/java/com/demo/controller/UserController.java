@@ -3,12 +3,17 @@ package com.demo.controller;
 import java.util.List;  
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;  
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;  
-import org.springframework.web.servlet.ModelAndView;  
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.demo.projo.User;
 import com.demo.service.UserService;
@@ -16,8 +21,38 @@ import com.demo.service.UserService;
 @Controller  
 public class UserController {  
     @Autowired  
-    private UserService userService;  
- 
+    private UserService userService;
+    /**
+     * 用户登录验证控制器
+     * @param userName
+     * @param password
+     * @param model
+     * @param request
+     * @return
+     */
+    @RequestMapping(value="/register",method={RequestMethod.POST})
+    public String registerCheck(@Param("UserName")String userName,@Param("password")String password,
+    		Model model,HttpServletRequest request){
+    	if(password.equals(userService.getPasswordByUserName(userName))){
+    		HttpSession session = request.getSession();
+    		session.setAttribute("userName", userName);
+    		session.setAttribute("password", password);
+    		return "redirect:/success";
+    	}else{
+    		model.addAttribute("error", "用户名或密码错误");
+    		return "register";
+    	}
+    }
+    @RequestMapping(value="register",method={RequestMethod.GET})
+	public String register(){
+		return "register";
+	}
+    
+    @RequestMapping("/success")
+    public String successPage(){
+    	return "success";
+    }
+    
     /**
 	 *  获取所有用户列表
 	 */
@@ -29,23 +64,28 @@ public class UserController {
 		return "/allUser";
 	}
 	/**
-	 *  跳转到添加用户界面
-	 * @return
-	 */
-	@RequestMapping("/toAddUser")
-	public String toAddUser(){
-		return "addUser";
-	}
-	/**
-	 *  添加用户并重定向
+	 *  添加用户(数据正确时)并重定向
 	 * @param user
 	 * @param model
 	 * @return
 	 */
-	@RequestMapping("/addUser")
-	public String addUser(User user,Model model){
-		userService.addUser(user);
-		return "redirect:/getAllUser";
+	@RequestMapping(value="/addUser",method={RequestMethod.POST})
+	public String addUserCheck(@Valid @ModelAttribute("user")User user,BindingResult result){
+		if(result.hasErrors()){
+			return "addUser";
+		}else{
+            userService.addUser(user);
+		    return "redirect:/getAllUser";
+		}
+	}
+	@ModelAttribute("user")  
+    public User getUser(){  
+        User user=new User();  
+        return user;  
+    }  
+	@RequestMapping(value="/addUser",method={RequestMethod.GET})
+	public String addUser(){
+		return "addUser";
 	}
 	/**
 	 *  编辑用户

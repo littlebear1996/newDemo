@@ -1,10 +1,29 @@
 package com.demo.projo;
 
-public class User {
+import javax.validation.constraints.NotNull;
 
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotEmpty;
+
+import com.demo.validation.UserNameNotExist;
+
+/**
+ * 用户Bean以及用户格式验证类
+ * @author jianxiong.lei
+ *
+ */
+public class User {
+	@NotNull(message="Id不能为空")
 	private int userId;
+	@UserNameNotExist
+	@NotEmpty(message="用户名不能为空")
 	private String userName;
+	@NotEmpty(message="密码不能为空")
+	@Length(min=6,max=16,message="密码长度不正确，必须在6-16位字母或数字组合")
 	private String password;
+	@NotEmpty(message="邮箱不能为空")
+	@Email(message="邮箱格式不正确")
 	private String userMail;	
 	public User() {
 	}

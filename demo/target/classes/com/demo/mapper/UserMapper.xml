@@ -35,4 +35,12 @@
   <select id="listAll"  resultMap="baseResultMap">
     select * from user_table
   </select>
+  <!-- 获取表中所有的用户名 -->
+  <select id="getAllUserName" resultType="String">
+    select user_name from user_table
+  </select>
+  <!-- 登录功能时通过输入的用户名获取用户表中该用户名对应的密码 -->
+  <select id="getPasswordByUserName" parameterType="String" resultType="String">
+    select user_password from user_table where user_name=#{userName}
+  </select>
 </mapper>

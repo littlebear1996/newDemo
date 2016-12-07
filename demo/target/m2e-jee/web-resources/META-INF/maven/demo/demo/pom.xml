@@ -6,7 +6,6 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
 	<name>demo</name>
-	<description />
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<!-- spring版本号 -->
@@ -179,6 +178,27 @@
 			<artifactId>javax.servlet.jsp.jstl</artifactId>
 			<version>1.2.2</version>
 		</dependency>
+	<!-- javaee-api包 注意和项目使用的JDK版本对应 -->  
+        <dependency>  
+            <groupId>javax</groupId>  
+            <artifactId>javaee-api</artifactId>  
+            <version>7.0</version>  
+            <scope>provided</scope>  
+        </dependency>  
+  
+        <!-- javaee-web-api包 注意和项目使用的JDK版本对应 -->  
+        <dependency>  
+            <groupId>javax</groupId>  
+            <artifactId>javaee-web-api</artifactId>  
+            <version>7.0</version>  
+            <scope>provided</scope>  
+        </dependency>
+        <!-- 验证管理包 --> 
+        <dependency>
+		    <groupId>org.hibernate</groupId>
+		    <artifactId>hibernate-validator</artifactId>
+		    <version>4.3.1.Final</version>
+	    </dependency> 
 		<!-- javaee-api包 注意和项目使用的JDK版本对应 -->
 		<dependency>
 			<groupId>javax</groupId>

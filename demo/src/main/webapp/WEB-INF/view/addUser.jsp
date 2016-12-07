@@ -1,4 +1,5 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%> 
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -16,28 +17,41 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<meta http-equiv="expires" content="0">    
 	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
 	<meta http-equiv="description" content="This is my page">
-	<!--
-	<link rel="stylesheet" type="text/css" href="styles.css">
-	-->
-	<script type="text/javascript">
-	  function addUser() {
-		var form = document.forms[0];
-		form.action = "<%=basePath%>addUser";
-		form.method = "post";
-		form.submit();
-	}
-	</script>
-
   </head>
   
   <body>
-    <h1><%=path %>添加用户<%=basePath %></h1>
-    <form action="" name="userForm">
-             用户ID：<input type="text" name="userId"><br>
-             用户名：<input type="text" name="userName"><br>
-             邮    箱：<input type="text" name="userMail"><br>
-             密    码：<input type="password" name="password"><br>
-               <input type="button" value="确认添加" onclick="addUser()">
-    </form>
+    <center>  
+        <h1>注册新用户</h1>  
+        <form:form action="addUser" method="post" modelAttribute="user">  
+			<tr>
+				<td><form:label path="userName">用户名：</form:label></td>
+				<td><form:input path="userName" value="${user.userName}"/></td>
+				<br />
+				<td><form:errors path="userName" cssStyle="color:red"/></td>
+				<br />
+			</tr>
+			<br />
+			<tr>
+				<td><form:label path="password">密 码: </form:label></td>
+				<td><form:password path="password" value="${user.password}"/></td>
+				<br />
+				<td><form:errors path="password" cssStyle="color:red"/></td>
+				<br />
+			</tr>
+			<br />
+			<tr>
+				<td><form:label path="userMail">邮 箱: </form:label></td>
+				<td><form:input path="userMail" value="${user.userMail}"/></td>
+				<br />
+				<td><form:errors path="userMail" cssStyle="color:red"/></td>
+				<br />
+			</tr>
+			<br />
+			<tr>  
+                <td colspan="3"><input type="submit" value="注册"></td>  
+                <td colspan="3"><input type="reset" value="重置"></td>  
+            </tr>
+        </form:form>  
+    </center>
   </body>
 </html>
