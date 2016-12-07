@@ -9,7 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+
 
 
 
@@ -17,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.demo.projo.Order;
 import com.demo.service.OrderService;
+import com.demo.validation.CheckOrder;
 
 
 /**
@@ -62,7 +66,7 @@ public class OrderController {
 	 * 添加订单并重定向到show页面
 	 */
 	@RequestMapping("/addOrder")
-	public String addOrder(@Valid Order order,BindingResult result) {
+	public String addOrder(@Validated(value={CheckOrder.class}) Order order,BindingResult result) {
 		if (!result.hasErrors()) {  
 			orderService.insertOrder(order);
 			return "redirect:/showOrder";
@@ -87,11 +91,13 @@ public class OrderController {
 	 * 修改订单
 	 */
 	@RequestMapping("/updateOrder")
-	public String updateOrder(Order order){
-		if(orderService.updateOrder(order)){
+	public String updateOrder(@Validated(value={CheckOrder.class}) Order order,BindingResult result){
+		if (!result.hasErrors()) {  
+			orderService.updateOrder(order);
 			return "redirect:/showOrder";
-		}else{
-			return "/error";
+        }  
+		else {
+			return "/editOrder";
 		}
 	}
 	/**
