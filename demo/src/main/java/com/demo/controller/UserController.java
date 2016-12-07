@@ -21,15 +21,9 @@ import com.demo.service.UserService;
 public class UserController {  
     @Autowired  
     private UserService userService;  
-    /**
-     * 项目进入的第一个页面（首页）
-     * @return
-     */
-    @RequestMapping("/")    
-    public ModelAndView getIndex(){      
-        ModelAndView mav = new ModelAndView("index");    
-        return mav;    
-    }
+
+
+ 
     /**
 	 *  获取所有用户列表
 	 */
