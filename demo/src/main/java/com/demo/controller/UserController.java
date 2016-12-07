@@ -3,8 +3,10 @@ package com.demo.controller;
 import java.util.List;  
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;  
 import org.springframework.ui.Model;
@@ -12,7 +14,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;  
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.ModelAndView;  
 
 import com.demo.projo.User;
 import com.demo.service.UserService;
@@ -20,10 +21,38 @@ import com.demo.service.UserService;
 @Controller  
 public class UserController {  
     @Autowired  
-    private UserService userService;  
-
-
- 
+    private UserService userService;
+    /**
+     * 用户登录验证控制器
+     * @param userName
+     * @param password
+     * @param model
+     * @param request
+     * @return
+     */
+    @RequestMapping(value="/register",method={RequestMethod.POST})
+    public String registerCheck(@Param("UserName")String userName,@Param("password")String password,
+    		Model model,HttpServletRequest request){
+    	if(password.equals(userService.getPasswordByUserName(userName))){
+    		HttpSession session = request.getSession();
+    		session.setAttribute("userName", userName);
+    		session.setAttribute("password", password);
+    		return "redirect:/success";
+    	}else{
+    		model.addAttribute("error", "用户名或密码错误");
+    		return "register";
+    	}
+    }
+    @RequestMapping(value="register",method={RequestMethod.GET})
+	public String register(){
+		return "register";
+	}
+    
+    @RequestMapping("/success")
+    public String successPage(){
+    	return "success";
+    }
+    
     /**
 	 *  获取所有用户列表
 	 */
@@ -45,8 +74,7 @@ public class UserController {
 		if(result.hasErrors()){
 			return "addUser";
 		}else{
-			
-		    userService.addUser(user);
+            userService.addUser(user);
 		    return "redirect:/getAllUser";
 		}
 	}

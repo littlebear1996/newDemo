@@ -37,5 +37,10 @@ public interface UserDao {
 	 * @return
 	 */
 	public List<String> getAllUserName();
+	/**
+	 * 登录功能时通过输入的用户名获取用户表中该用户名对应的密码
+	 * @return
+	 */
+	public String getPasswordByUserName(String userName);
 	
 }
