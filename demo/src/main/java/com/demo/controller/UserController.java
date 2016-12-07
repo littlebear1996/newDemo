@@ -60,7 +60,6 @@ public class UserController {
 	public String getAllUser(HttpServletRequest request,Model model){
 		List<User> list = userService.listAll();
 		model.addAttribute("userList", list);
-		request.setAttribute("userList", list);
 		return "/allUser";
 	}
 	/**
