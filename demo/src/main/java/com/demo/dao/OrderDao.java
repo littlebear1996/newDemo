@@ -36,4 +36,9 @@ public interface OrderDao {
 	 * @return List：Order列表
 	 */
     public List<Order> selectAllOrder();
+    /**
+     * 查询所有用户名
+     * @return List：用户名列表
+     */
+    public List<String> getAllUserName();
 }
