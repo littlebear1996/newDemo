@@ -18,9 +18,9 @@ public class UserServiceTest extends SpringTestCase{
 	
 	@Test
 	public void listAllTest(){
-		List<User> list = userService.listAll();
-		for(User user:list){
-			System.out.println(user);
+		List<String> list = userService.getAllUserName();
+		for (String userName : list) {
+			System.out.println(userName);
 		}
 	}
 }

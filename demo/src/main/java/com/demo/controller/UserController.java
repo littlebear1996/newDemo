@@ -1,16 +1,17 @@
 package com.demo.controller;
 
-import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.List;  
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;  
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;  
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;  
 
 import com.demo.projo.User;
@@ -26,9 +27,7 @@ public class UserController {
      */
     @RequestMapping("/")    
     public ModelAndView getIndex(){      
-        ModelAndView mav = new ModelAndView("index");   
-        //User user = userService.findUserById(31);  
-        //mav.addObject("user", user);   
+        ModelAndView mav = new ModelAndView("index");    
         return mav;    
     }
     /**
@@ -42,23 +41,29 @@ public class UserController {
 		return "/allUser";
 	}
 	/**
-	 *  跳转到添加用户界面
-	 * @return
-	 */
-	@RequestMapping("/toAddUser")
-	public String toAddUser(){
-		return "addUser";
-	}
-	/**
-	 *  添加用户并重定向
+	 *  添加用户(数据正确时)并重定向
 	 * @param user
 	 * @param model
 	 * @return
 	 */
-	@RequestMapping("/addUser")
-	public String addUser(User user,Model model){
-		userService.addUser(user);
-		return "redirect:/getAllUser";
+	@RequestMapping(value="/addUser",method={RequestMethod.POST})
+	public String addUserCheck(@Valid @ModelAttribute("user")User user,BindingResult result){
+		if(result.hasErrors()){
+			return "addUser";
+		}else{
+			
+		    userService.addUser(user);
+		    return "redirect:/getAllUser";
+		}
+	}
+	@ModelAttribute("user")  
+    public User getUser(){  
+        User user=new User();  
+        return user;  
+    }  
+	@RequestMapping(value="/addUser",method={RequestMethod.GET})
+	public String addUser(){
+		return "addUser";
 	}
 	/**
 	 *  编辑用户

@@ -27,7 +27,7 @@ public class OrderController {
 	/**
 	 * 首页
 	 */
-	@RequestMapping("/")
+	@RequestMapping("/view")
 	public ModelAndView getIndex(){
 		ModelAndView mav = new ModelAndView("index");
 		return mav;

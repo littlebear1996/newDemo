@@ -35,4 +35,8 @@
   <select id="listAll"  resultMap="baseResultMap">
     select * from user_table
   </select>
+  <!-- 获取表中所有的用户名 -->
+  <select id="getAllUserName" resultType="String">
+    select user_name from user_table
+  </select>
 </mapper>

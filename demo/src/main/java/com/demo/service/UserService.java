@@ -32,4 +32,9 @@ public interface UserService {
 	 * @return
 	 */
 	public List<User> listAll();
+	/**
+	 * 获取表中的所有用户名
+	 * @return
+	 */
+	public List<String> getAllUserName();
 }

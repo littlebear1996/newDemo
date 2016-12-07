@@ -21,14 +21,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </head>
   
   <body>
-    <h6><a href="<%=basePath%>toAddUser">添加用户</a></h6>
+    <h6><a href="<%=basePath%>addUser">添加用户</a></h6>
     <table border="1" cellpadding="10" cellspacing="0">
       <tbody>
         <tr>
           <th>用户ID</th>
           <th>用户名</th>
           <th>邮箱</th>
-          <th>操作</th>
+          <th colspan="2">操作</th>
         </tr>
           <c:forEach items="${userList}" var="user">
             <tr>
