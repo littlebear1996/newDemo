@@ -41,6 +41,10 @@ public class UserController {
     		return "/register";
     	}
     }
+    @RequestMapping(value="/register",method={RequestMethod.GET})
+    public String register(){
+    	return "register";
+    }
     @RequestMapping("/success")
     public String successPage(){
     	return "success";

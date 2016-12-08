@@ -21,8 +21,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </head>
   
   <body>
-    <h6><a href="<%=basePath%>addUser">用户注册 </a></h6>
-    <table border="1" cellpadding="10" cellspacing="0">
+    <table align="center" border="1" cellpadding="10" cellspacing="0">
       <tbody>
         <tr>
           <th>用户ID</th>
