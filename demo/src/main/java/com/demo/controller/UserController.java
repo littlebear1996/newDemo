@@ -39,7 +39,7 @@ public class UserController {
     		session.setAttribute("password", password);
     		return "redirect:/success";
     	}else{
-    		model.addAttribute("error", "用户名或密码错误");
+    		request.setAttribute("error", "用户名或密码错误");
     		return "register";
     	}
     }

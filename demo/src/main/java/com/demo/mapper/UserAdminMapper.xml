@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>    
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"    
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="com.demo.dao.UserAdminDao"><!-- namespqce必须和接口全名一致 -->
+  <resultMap type="com.demo.projo.UserAdmin" id="baseResultMap">
+    <id column="admin_id" property="adminId" jdbcType="INTEGER"/>
+    <result column="admin_name" property="adminName" jdbcType="CHAR"/>
+    <result column="admin_password" property="adminPassword" jdbcType="CHAR"/>
+  </resultMap>
+  <!-- 通过管理员用户名获取管理员密码 -->
+  <select id="getAdminPasswordByAdminName" parameterType="String" resultType="String">
+    select admin_password from admin_table where admin_name=#{adminName}
+  </select>
+</mapper>

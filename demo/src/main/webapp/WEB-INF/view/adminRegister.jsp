@@ -1,5 +1,4 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -10,7 +9,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <head>
     <base href="<%=basePath%>">
     
-    <title>My JSP 'register.jsp' starting page</title>
+    <title>My JSP 'adminRegister.jsp' starting page</title>
     
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
@@ -18,9 +17,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
 	<meta http-equiv="description" content="This is my page">
 	<script type="text/javascript">
-	  function userRegister() {
+	  function adminRegister() {
 		var form = document.forms[0];
-		form.action = "<%=basePath%>register";
+		form.action = "<%=basePath%>adminRegister";
 		form.method="post";
 		form.submit();
 	}
@@ -30,13 +29,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   
   <body>
     <center>  
-        <h1>欢迎登录</h1>  
-       <form action="" name="registerForm">
-                           用户名：<input type="text" name="userName"><br>
-                           密    码：<input type="password" name="password"><br>
-             <dir>${error}</dir><br>
-         <input type="button" value="登录" onclick="userRegister()">
-         <a href="<%=basePath%>/adminRegister">管理员登录</a> 
+        <h1>欢迎进入管理员登录页面登录</h1>  
+       <form action="" name="adminRegisterForm">
+                           管理员用户名：<input type="text" name="adminName"><br>
+                           管理员密码：<input type="password" name="adminPassword"><br>
+         <input type="button" value="登录" onclick="adminRegister()">
        </form>  
     </center>
   </body>
