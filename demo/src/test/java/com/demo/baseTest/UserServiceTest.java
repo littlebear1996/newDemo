@@ -6,17 +6,16 @@ import org.apache.log4j.Logger;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.demo.projo.User;
-import com.demo.service.UserService;
+import com.demo.service.UserAdminService;
 
 public class UserServiceTest extends SpringTestCase{
 
 	@Autowired
-	private UserService userService;
+	private UserAdminService userAdminService;
 	Logger logger = Logger.getLogger(UserServiceTest.class);
 	
 	@Test
 	public void test(){
-		System.out.println(userService.getPasswordByUserName("jianxiong.lei"));
+		System.out.println(userAdminService.getAdminPasswordByAdminName("admin"));
 	}
 }
