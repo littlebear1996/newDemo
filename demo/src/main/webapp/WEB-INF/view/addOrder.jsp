@@ -35,8 +35,8 @@
 	<form:form method="POST" modelAttribute="order" action="addOrder">
 		<table align="center">
 			<tr>
-				<td>用户名</td>
-				<td><form:input path="user" /></td>
+				<td>用户</td>
+				<td><input type="text" name="user"></td>
 				<td><form:errors path="user" cssClass="error" /></td>
 			</tr>
 			<tr>

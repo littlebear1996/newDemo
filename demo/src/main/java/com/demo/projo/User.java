@@ -1,11 +1,15 @@
 package com.demo.projo;
 
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
 
+import com.demo.validation.Group1;
+import com.demo.validation.Group2;
+import com.demo.validation.Group3;
 import com.demo.validation.UserNameNotExist;
 
 /**
@@ -14,16 +18,16 @@ import com.demo.validation.UserNameNotExist;
  *
  */
 public class User {
-	@NotNull(message="Id不能为空")
 	private int userId;
-	@UserNameNotExist
-	@NotEmpty(message="用户名不能为空")
+	@UserNameNotExist(groups=Group3.class)
+	@Pattern(groups=Group2.class,regexp = "^[a-zA-z][a-zA-Z0-9_]{3,9}$", message = "4-10位的字母下划线和数字组成,不能以数字或下划线开头。")
+	@NotEmpty(groups=Group1.class,message="用户名不能为空")
 	private String userName;
-	@NotEmpty(message="密码不能为空")
-	@Length(min=6,max=16,message="密码长度不正确，必须在6-16位字母或数字组合")
+	@NotEmpty(groups=Group1.class, message="密码不能为空")
+	@Length(groups=Group2.class,min=6,max=16,message="密码长度不正确，必须在6-16位字母或数字组合")
 	private String password;
-	@NotEmpty(message="邮箱不能为空")
-	@Email(message="邮箱格式不正确")
+	@NotEmpty(groups=Group1.class,message="邮箱不能为空")
+	@Email(groups=Group2.class,message="邮箱格式不正确")
 	private String userMail;	
 	public User() {
 	}

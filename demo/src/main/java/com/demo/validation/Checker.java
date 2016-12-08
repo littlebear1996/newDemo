@@ -8,6 +8,6 @@ import javax.validation.GroupSequence;
  *
  */
 @GroupSequence({Group1.class, Group2.class,Group3.class})
-public interface CheckOrder {
+public interface Checker {
 
 }

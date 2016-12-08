@@ -11,12 +11,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;  
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;  
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.demo.projo.User;
 import com.demo.service.UserService;
+import com.demo.validation.Checker;
  
 @Controller  
 public class UserController {  
@@ -31,23 +34,16 @@ public class UserController {
      * @return
      */
     @RequestMapping(value="/register",method={RequestMethod.POST})
-    public String registerCheck(@Param("UserName")String userName,@Param("password")String password,
-    		Model model,HttpServletRequest request){
-    	if(password.equals(userService.getPasswordByUserName(userName))){
-    		HttpSession session = request.getSession();
-    		session.setAttribute("userName", userName);
-    		session.setAttribute("password", password);
-    		return "redirect:/success";
+    public String registerCheck(String userName,String password,HttpSession hs
+    		,HttpServletRequest request){
+    	if(password.equals(userService.getPasswordByUserName(userName))){ 
+    	     hs.setAttribute("userName",userName);
+    		return "redirect:/showOrder";
     	}else{
-    		model.addAttribute("error", "用户名或密码错误");
-    		return "register";
+    		request.setAttribute("loginError", "用户名或密码错误");
+    		return "/register";
     	}
     }
-    @RequestMapping(value="register",method={RequestMethod.GET})
-	public String register(){
-		return "register";
-	}
-    
     @RequestMapping("/success")
     public String successPage(){
     	return "success";
@@ -70,12 +66,12 @@ public class UserController {
 	 * @return
 	 */
 	@RequestMapping(value="/addUser",method={RequestMethod.POST})
-	public String addUserCheck(@Valid @ModelAttribute("user")User user,BindingResult result){
+	public String addUserCheck(@Validated(value={Checker.class}) User user,BindingResult result){
 		if(result.hasErrors()){
 			return "addUser";
 		}else{
             userService.addUser(user);
-		    return "redirect:/getAllUser";
+		    return "redirect:/register";
 		}
 	}
 	@ModelAttribute("user")  
@@ -83,7 +79,7 @@ public class UserController {
         User user=new User();  
         return user;  
     }  
-	@RequestMapping(value="/addUser",method={RequestMethod.GET})
+	@RequestMapping(value="/toAddUser",method={RequestMethod.GET})
 	public String addUser(){
 		return "addUser";
 	}

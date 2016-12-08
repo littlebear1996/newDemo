@@ -18,7 +18,7 @@ public class OrderServiceTest extends SpringTestCase{
 	
 	@Test
 	public void listAllTest(){
-		List<Order> list = orderService.selectAllOrder();
+		List<Order> list = orderService.getOrderByUserName("sssss");
 		// 下单逻辑
 		
 		//1.验证用户
@@ -36,7 +36,6 @@ public class OrderServiceTest extends SpringTestCase{
 		//7....
 		
 		for(Order order:list){
-			System.out.println(1/0);
 			System.out.println(order);
 		}
 	}

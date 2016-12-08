@@ -38,4 +38,8 @@ public interface OrderService {
 	 * @return：List：Order列表
 	 */
 	public List<Order> selectAllOrder();
+	 /**
+     * 根据用户名查询用户订单
+     */
+    public List<Order> getOrderByUserName(String userName);
 }

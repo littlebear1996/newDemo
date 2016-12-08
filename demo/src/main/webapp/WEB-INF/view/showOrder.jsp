@@ -26,6 +26,7 @@
 </head>
 
 <body>
+    <h1 align="center">欢迎您${userName}</h1>
 	<table align="center" border="1" cellpadding="10" cellspacing="0">
 		<tr>
 			<th>订单编号</th>
@@ -51,7 +52,7 @@
 				<td><a href="<%=basePath%>delOrder?orderId=${order.orderId}">Delete</a></td>
 			</tr>
 		</c:forEach>
-		<input type="button" value="添加订单" onclick="window.location.href='toAddOrder'">
+		<input type="button" value="添加订单" onclick="window.location.href='toAddOrder?'">
 	</table>
 </body>
 </html>

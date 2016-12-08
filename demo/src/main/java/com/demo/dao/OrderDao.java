@@ -41,4 +41,8 @@ public interface OrderDao {
      * @return List：用户名列表
      */
     public List<String> getAllUserName();
+    /**
+     * 根据用户名查询用户订单
+     */
+    public List<Order> getOrderByUserName(String userName);
 }

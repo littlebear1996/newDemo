@@ -2,6 +2,7 @@ package com.demo.projo;
 
 import java.util.Date;
 
+import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
@@ -33,17 +34,17 @@ public class Order {
 	/**
 	 * 订单金额
 	 */
-	@NotNull(groups=Group3.class,message = "金额不能为空")
+	@NotNull(groups=Group1.class,message = "金额不能为空")
 	private Double money;
 	/**
 	 * 订单类型：到付/即付
 	 */
-	@NotBlank(groups=Group3.class,message = "订单类型不能为空")
+	@NotBlank(groups=Group1.class,message = "订单类型不能为空")
 	private String orderType;
 	/**
 	 * 订单收货地址
 	 */
-	@NotBlank(groups=Group3.class,message = "收货地址不能为空")
+	@NotBlank(groups=Group1.class,message = "收货地址不能为空")
 	private String orderAddr;
 	/**
 	 * 下单时间

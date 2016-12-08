@@ -3,6 +3,7 @@ package com.demo.controller;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,9 +19,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 
 
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 import com.demo.projo.Order;
 import com.demo.service.OrderService;
-import com.demo.validation.CheckOrder;
+import com.demo.validation.Checker;
 
 
 /**
@@ -39,7 +42,7 @@ public class OrderController {
 	public String getIndex() {
 		
 		
-		return "/index";
+		return "/register";
 	}
 //	@RequestMapping("/")
 //	public ModelAndView getIndex(){
@@ -47,11 +50,13 @@ public class OrderController {
 //		return mav;
 //	}
 	/**
-	 * 获取所有订单
+	 * 获取某个用户的所有订单
 	 */
 	@RequestMapping("/showOrder")
-	public String getAllOrder(Map<String,Object> map){
-		map.put("orderList", orderService.selectAllOrder());
+	public String getAllOrder(HttpSession hs, Map<String,Object> map){
+		  String userName = (String) hs.getAttribute("userName");
+		   map.put("orderList", orderService.getOrderByUserName(userName));
+		   map.put("userName", userName);
 		return "/showOrder";
 	}
 	/**
@@ -66,7 +71,8 @@ public class OrderController {
 	 * 添加订单并重定向到show页面
 	 */
 	@RequestMapping("/addOrder")
-	public String addOrder(@Validated(value={CheckOrder.class}) Order order,BindingResult result) {
+	public String addOrder(@Validated(value={Checker.class}) Order order,BindingResult result
+			) {
 		if (!result.hasErrors()) {  
 			orderService.insertOrder(order);
 			return "redirect:/showOrder";
@@ -91,7 +97,8 @@ public class OrderController {
 	 * 修改订单
 	 */
 	@RequestMapping("/updateOrder")
-	public String updateOrder(@Validated(value={CheckOrder.class}) Order order,BindingResult result){
+	public String updateOrder(@Validated(value={Checker.class}) Order order,
+			BindingResult result){
 		if (!result.hasErrors()) {  
 			orderService.updateOrder(order);
 			return "redirect:/showOrder";

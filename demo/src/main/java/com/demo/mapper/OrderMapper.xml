@@ -27,7 +27,7 @@
   <!-- 在order表中更新数据 -->
   <update id="updateOrder" parameterType="com.demo.projo.Order">
     update order_table set user=#{user},money=#{money},orderType=#{orderType},orderAddr=#{orderAddr},
-    orderTime=now(),state=#{state} where orderId=#{orderId}
+    state=#{state} where orderId=#{orderId}
   </update>
   <!-- 查找订单表中的所有用户 -->
   <select id="selectAllOrder"  resultMap="baseResultMap">
@@ -36,5 +36,8 @@
    <!-- 查找用户表中的所有用户名 -->
   <select id="getAllUserName"  resultType="String">
     select USER_NAME from user_table
+  </select>
+  <select id="getOrderByUserName" parameterType="String" resultMap="baseResultMap">
+    select * from order_table where user = #{userName}
   </select>
 </mapper>

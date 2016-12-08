@@ -49,4 +49,10 @@ public class OrderServiceImpl implements OrderService {
 		return orderDao.selectAllOrder();
 	}
 
+	@Override
+	public List<Order> getOrderByUserName(String userName) {
+		// TODO Auto-generated method stub
+		return orderDao.getOrderByUserName(userName);
+	}
+
 }

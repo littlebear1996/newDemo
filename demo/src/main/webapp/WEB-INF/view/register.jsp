@@ -34,8 +34,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
        <form action="" name="registerForm">
                            用户名：<input type="text" name="userName"><br>
                            密    码：<input type="password" name="password"><br>
-                           ${request.error}<br>
+         <div style="color: #F00"> ${loginError}</div><br>
          <input type="button" value="登录" onclick="userRegister()"> 
+         <input type="button" value="注册" onclick="window.location.href='toAddUser'">
        </form>  
     </center>
   </body>
