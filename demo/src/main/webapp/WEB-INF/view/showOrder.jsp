@@ -52,7 +52,10 @@
 				<td><a href="<%=basePath%>delOrder?orderId=${order.orderId}">Delete</a></td>
 			</tr>
 		</c:forEach>
-		<input type="button" value="添加订单" onclick="window.location.href='toAddOrder?'">
 	</table>
+	<div align="center">
+	<input type="button" value="添加订单" onclick="window.location.href='toAddOrder'">
+	<input type="button" value="切换用户" onclick="window.location.href='register'">
+	</div>
 </body>
 </html>

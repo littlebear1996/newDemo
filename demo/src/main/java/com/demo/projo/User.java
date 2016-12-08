@@ -20,7 +20,7 @@ import com.demo.validation.UserNameNotExist;
 public class User {
 	private int userId;
 	@UserNameNotExist(groups=Group3.class)
-	@Pattern(groups=Group2.class,regexp = "^[a-zA-z][a-zA-Z0-9_]{3,9}$", message = "4-10位的字母下划线和数字组成,不能以数字或下划线开头。")
+	@Pattern(groups=Group2.class,regexp = "^[a-zA-z][a-zA-Z0-9_]{2,9}$", message = "3-10位的字母下划线和数字组成,不能以数字或下划线开头。")
 	@NotEmpty(groups=Group1.class,message="用户名不能为空")
 	private String userName;
 	@NotEmpty(groups=Group1.class, message="密码不能为空")

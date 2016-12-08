@@ -1,5 +1,7 @@
 package com.demo.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,8 +23,9 @@ public class UserAdminController {
 	 */
 	@RequestMapping(value="/adminRegister",method={RequestMethod.POST})
 	public String adminRegisterCheck(@Param("adminName")String adminName,
-			@Param("adminPassword")String adminPassword){
+			@Param("adminPassword")String adminPassword,HttpSession hs){
 		if(adminPassword.equals(userAdminService.getAdminPasswordByAdminName(adminName))){
+			hs.setAttribute("admin", adminName);
 			return "redirect:/getAllUser";
 		}
 		return "adminRegister";
