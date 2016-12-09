@@ -53,10 +53,12 @@ public class OrderController {
 	 * 获取某个用户的所有订单
 	 */
 	@RequestMapping("/showOrder")
-	public String getAllOrder(HttpSession hs, Map<String,Object> map){
-		  String userName = (String) hs.getAttribute("userName");
-		   map.put("orderList", orderService.getOrderByUserName(userName));
+	public String getAllOrder(String userName,HttpSession hs, Map<String,Object> map){
+		if(null==userName){
+		  userName = (String) hs.getAttribute("userName");
 		   map.put("userName", userName);
+		}
+		map.put("orderList", orderService.getOrderByUserName(userName));
 		return "/showOrder";
 	}
 	/**
