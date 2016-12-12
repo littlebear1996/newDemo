@@ -33,6 +33,7 @@ public class UserController {
     @RequestMapping(value="/register",method={RequestMethod.POST})
     public String registerCheck(String userName,String password,HttpSession hs
     		,HttpServletRequest request){
+    	//明文验证问题  注意实现密文  
     	if(password.equals(userService.getPasswordByUserName(userName))){ 
     	     hs.setAttribute("userName",userName);
     		return "redirect:/showOrder";
