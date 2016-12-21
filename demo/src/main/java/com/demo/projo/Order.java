@@ -1,5 +1,6 @@
 package com.demo.projo;
 
+
 import java.util.Date;
 
 import javax.validation.constraints.Max;
@@ -8,7 +9,6 @@ import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.NotBlank;
 
-import com.demo.validation.CheckMony;
 import com.demo.validation.CheckUser;
 import com.demo.validation.Group1;
 import com.demo.validation.Group2;

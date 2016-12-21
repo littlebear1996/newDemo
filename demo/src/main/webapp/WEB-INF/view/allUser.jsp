@@ -27,7 +27,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
           <th>用户ID</th>
           <th>用户名</th>
           <th>邮箱</th>
-          <th colspan="2">操作</th>
+          <th colspan="3">操作</th>
         </tr>
           <c:forEach items="${userList}" var="user">
             <tr>
@@ -36,6 +36,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
               <td>${user.userMail}</td>
               <td><a href="<%=basePath%>getUser?userId=${user.userId}">编辑</a></td>
               <td><a href="<%=basePath%>delUser?userId=${user.userId}">删除</a></td>
+              <td><a href="<%=basePath%>showOrder?userName=${user.userName}">订单</a></td>
             </tr>
           </c:forEach>
       </tbody>

@@ -18,7 +18,7 @@ public class OrderServiceTest extends SpringTestCase{
 	
 	@Test
 	public void listAllTest(){
-		List<Order> list = orderService.getOrderByUserName("sssss");
+		List<Order> list = orderService.getOrderByUserName("tom");
 		// 下单逻辑
 		
 		//1.验证用户
